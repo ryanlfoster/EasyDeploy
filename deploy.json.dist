@@ -1,0 +1,47 @@
+{
+	"servers" : {
+		"default" : {
+			"_type"		: "ftp",
+			"server"	: "obro.nl",
+			"username"	: "obro",
+			"password"	: "123456",
+			"path"		: "/domains/obro.nl/public_html/"
+		},
+		"development" : {
+			"_type"		: "sftp",
+			"server"	: "obro.nl",
+			"path"		: "/home/obro/domains/obro.nl/public_html/",
+			"commands"	: [
+				"/usr/local/bin/php app/console cache:clear"
+			]
+		},
+		"multi" : {
+			"_type"		: "group",
+			"servers"	: [
+				{
+					"_type"		: "ftp",
+					"server"	: "obro.nl",
+					"username"	: "obro",
+					"password"	: "123456",
+					"path"		: "/domains/obro.nl/public_html/"
+				},
+				{
+					"_type"		: "ftp",
+					"server"	: "obro.nl",
+					"username"	: "obro",
+					"password"	: "123456",
+					"path"		: "/domains/obro.nl/public_html/"
+				}
+			]
+		},
+		"api" {
+			"_type"		: "api",
+			"server"	: "https://www.jcid.nl/api/wachtwoord/ftp?id=1"
+		}
+	},
+	"deploy" : {
+		"master"	: ['default', 'multi'],
+		"dev"		: ['development'],
+		"deploy"	: ['multi']
+	}
+}

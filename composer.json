@@ -1,0 +1,10 @@
+{
+	"require": {
+		"justinrainbow/json-schema": ">=1.1.0",
+		"seld/jsonlint": "*",
+		"symfony/class-loader": "2.1.*",
+		"symfony/console": "2.1.*",
+		"symfony/process": "2.1.*",
+		"symfony/event-dispatcher": "2.1.*"
+	}
+}

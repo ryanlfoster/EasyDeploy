@@ -1,0 +1,20 @@
+{
+	"name" : "Deployment tool",
+	"type" : "object",
+	"properties" : {
+		"servers" : {
+			"type"			: "object",
+			"description"	: "List of deployment servers",
+			"required"		: true,
+		},
+		"deploy" : {
+			"type"			: "object",
+			"description"	: "List of deployment branches",
+			"required"		: true
+		}
+		"events" : {
+			"type"			: "object"
+			"description"	: "List of events to register",
+		}
+	}
+}
