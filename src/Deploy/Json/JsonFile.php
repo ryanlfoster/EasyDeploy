@@ -1,10 +1,15 @@
 <?php
 
+/*
+ * This file is part of the Deploy package.
+ *
+ * (c) Cliff Odijk <cliff@obro.nl>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+ 
 namespace Deploy\Json;
-
-use JsonSchema\Validator;
-use Seld\JsonLint\JsonParser;
-
 
 /**
  * Reads/writes json files.
@@ -12,11 +17,8 @@ use Seld\JsonLint\JsonParser;
  * @author Konstantin Kudryashiv <ever.zet@gmail.com>
  * @author Jordi Boggiano <j.boggiano@seld.be>
  */
-class JsonFile
+class JsonFile extends JsonString
 {
-	const LAX_SCHEMA = 1;
-	const STRICT_SCHEMA = 2;
-
 	private $path;
 
 	/**
@@ -27,24 +29,6 @@ class JsonFile
 	public function __construct($path)
 	{
 		$this->path = $path;
-	}
-	
-	/**
-	 *
-	 */
-	public function getPath()
-	{
-		return $this->path;
-	}
-
-	/**
- 	 * Checks whether json file exists.
- 	 *
- 	 * @return  Boolean
- 	 */
-	public function exists()
-	{
-		return is_file($this->path);
 	}
 
 	/**
@@ -60,85 +44,6 @@ class JsonFile
 			throw new \RuntimeException('Could not read '.$this->path.', you are probably offline ('.$e->getMessage().')');
 		}
 
-		return static::parseJson($json);
+		return $this->setData($json);
 	}
-
-	/**
- 	 * Validates the schema of the current json file according to composer-schema.json rules
- 	 *
- 	 * @param int $schema a JsonFile::*_SCHEMA constant
- 	 * @return Boolean true on success
- 	 * @throws \UnexpectedValueException
- 	 */
-	public function validateSchema($schema = self::STRICT_SCHEMA)
-	{
-		$content = file_get_contents($this->path);
-		$data = json_decode($content);
-
-		if (null === $data && 'null' !== $content) {
-			self::validateSyntax($content);
-		}
-
-		$schemaFile = __DIR__ . '/../../../res/schema.json';
-		$schemaData = json_decode(file_get_contents($schemaFile));
-
-		if ($schema === self::LAX_SCHEMA) {
-			$schemaData->additionalProperties = true;
-			$schemaData->properties->name->required = false;
-			$schemaData->properties->description->required = false;
-		}
-
-		$validator = new Validator();
-		$validator->check($data, $schemaData);
-
-		// TODO add more validation like check version constraints and such, perhaps build that into the arrayloader?
-
-		if (!$validator->isValid()) {
-			$errors = array();
-			foreach ((array) $validator->getErrors() as $error) {
-				$errors[] = ($error['property'] ? $error['property'].' : ' : '').$error['message'];
-			}
-			throw new JsonValidationException($errors);
-		}
-
-		return true;
-	}
-	
-	
-	/**
- 	 * Parses json string and returns hash.
- 	 *
- 	 * @param string $json json string
- 	 *
- 	 * @return  mixed
- 	 */
-	public static function parseJson($json)
-	{
-		$data = json_decode($json, true);
-		if (null === $data && 'null' !== $json) {
-			self::validateSyntax($json);
-		}
-
-		return $data;
-	}
-
-	/**
- 	 * Validates the syntax of a JSON string
- 	 *
- 	 * @param string $json
- 	 * @return Boolean true on success
- 	 * @throws \UnexpectedValueException
- 	 */
-	protected static function validateSyntax($json)
-	{
-		$parser = new JsonParser();
-		$result = $parser->lint($json);
-
-		if (null === $result) {
-			return true;
-		}
-
-		throw $result;
-	}
-
 }

@@ -1,0 +1,17 @@
+#!/usr/bin/env php
+<?php
+
+// Add default git command
+array_shift($_SERVER['argv']);
+$_SERVER['argv'] = array_merge(array('', 'git'), $_SERVER['argv']);
+
+error_reporting(E_ALL);
+ini_set("display_errors", true);
+
+require_once(__DIR__."/../autoload.php");
+
+use Deploy\Console\Application;
+
+// run the command application
+$application = new Application();
+$application->run();

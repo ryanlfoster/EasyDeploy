@@ -5,16 +5,15 @@
 		"servers" : {
 			"type"			: "object",
 			"description"	: "List of deployment servers",
-			"required"		: true,
+			"required"		: true
 		},
 		"deploy" : {
 			"type"			: "object",
-			"description"	: "List of deployment branches",
-			"required"		: true
-		}
+			"description"	: "List of deployment branches"
+		},
 		"events" : {
-			"type"			: "object"
-			"description"	: "List of events to register",
+			"type"			: "object",
+			"description"	: "List of events to register"
 		}
 	}
 }

@@ -1,6 +1,10 @@
+#!/usr/bin/env php
 <?php
 
-require_once("autoload.php");
+error_reporting(E_ALL);
+ini_set("display_errors", true);
+
+require_once(__DIR__."/../autoload.php");
 
 use Deploy\Console\Application;
 

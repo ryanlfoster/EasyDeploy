@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Deploy package.
+ *
+ * (c) Cliff Odijk <cliff@obro.nl>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Deploy\Console;
 
 use Symfony\Component\Console\Application as BaseApplication;
@@ -14,6 +23,11 @@ use Deploy\Command;
  */
 class Application extends BaseApplication
 {
+	public function __construct()
+    {
+        parent::__construct('EasyDeploy', '1.0.0');
+    }
+	
 	/**
  	 * {@inheritDoc}
  	 */
@@ -28,7 +42,8 @@ class Application extends BaseApplication
  	 */
 	protected function registerCommands()
 	{
-		$this->add(new Command\UploadCommand());
+		$this->add(new Command\GitCommand());
+		$this->add(new Command\SvnCommand());
 	}
 	
 }

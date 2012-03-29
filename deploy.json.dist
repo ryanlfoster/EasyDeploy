@@ -1,47 +1,90 @@
 {
+	"deploy" : {
+		"master"	: 'server1',
+		"dev"		: ['server2'],
+		"deploy"	: ['server3', 'server4']
+	},
 	"servers" : {
-		"default" : {
-			"_type"		: "ftp",
-			"server"	: "obro.nl",
-			"username"	: "obro",
-			"password"	: "123456",
-			"path"		: "/domains/obro.nl/public_html/"
+		"server1" : {
+			"_type"			: "Deploy/Server/Ftp",
+			"server"		: "demodomain.com",
+			"port"			: 21,						// Optional
+			"username"		: "demo",
+			"password"		: "login",
+			"path"			: "/path/on/remote"
 		},
-		"development" : {
-			"_type"		: "sftp",
-			"server"	: "obro.nl",
-			"path"		: "/home/obro/domains/obro.nl/public_html/",
-			"commands"	: [
-				"/usr/local/bin/php app/console cache:clear"
-			]
+		"server2" : {
+			"_type"			: "Deploy/Server/Sftp",
+			"_auth"			: "password",				// List(none, password, pubkey)
+			"server"		: "demodomain.com",
+			"port"			: 22,						// Optional
+			"username"		: "demo",
+			"password"		: "login",					// Required for _auth:password or _auth:pubkey as passphrase
+			"privkeyfile"	: "/path/to/key"			// Required for _auth:pubkey
 		},
-		"multi" : {
-			"_type"		: "group",
+		"server3" : {
+			"_type"		: "Deploy/Server/Group",
 			"servers"	: [
 				{
-					"_type"		: "ftp",
-					"server"	: "obro.nl",
-					"username"	: "obro",
-					"password"	: "123456",
-					"path"		: "/domains/obro.nl/public_html/"
+					"_type"			: "Deploy/Server/Ftp",
+					"server"		: "demodomain.com",
+					"port"			: 21,						// Optional
+					"username"		: "demo",
+					"password"		: "login",
+					"path"			: "/path/on/remote"
 				},
 				{
-					"_type"		: "ftp",
-					"server"	: "obro.nl",
-					"username"	: "obro",
-					"password"	: "123456",
-					"path"		: "/domains/obro.nl/public_html/"
+					"_type"			: "Deploy/Server/Ftp",
+					"server"		: "demodomain.com",
+					"port"			: 21,						// Optional
+					"username"		: "demo",
+					"password"		: "login",
+					"path"			: "/path/on/remote"
 				}
 			]
 		},
-		"api" {
-			"_type"		: "api",
-			"server"	: "https://www.jcid.nl/api/wachtwoord/ftp?id=1"
+		"server4" : {
+			"_type"		: "Deploy/Server/Group",
+			"servers"	: [
+				{
+					"_type"			: "Custom/Server/Api",
+					"optional"		: "params",
+				},
+				{
+					"_type"			: "Custom/Server/Db",
+					"optional"		: "params",
+				}
+			]
+		},
+		"server5 : {
+			"_type"		: "Deploy/Server/Group",
+			"servers"	: [
+				"server1",
+				"server2",
+				"server3"
+			]
 		}
 	},
-	"deploy" : {
-		"master"	: ['default', 'multi'],
-		"dev"		: ['development'],
-		"deploy"	: ['multi']
+	"events" : {
+		"post.upload" : [
+			{
+				"_type"		: "Deploy/Listner/RemoteExecute",
+				"command"	: "/usr/local/bin/php {{ path }}/cronjob/run.php cleancache --all"
+			}
+		],
+		"pre.upload" : [
+			{
+				"_type"		: "Deploy/Listner/LocalExecute",
+				"_deploy"	: "master",
+				"command"	: "/do/somthing/local"
+			},
+			{
+				"_type"		: "Deploy/Listner/MailZend",
+				"_server"	: "default",
+				"to"		: "cliff@obro.nl",
+				"subject"	: "Er is een commit gedaan op branch {{ branch }}",
+				"bericht"	: "Iemand heeft een commit gedaan voor {{ server }} {{ branch }} {{ old }} {{ new }}"
+			}
+		]
 	}
 }

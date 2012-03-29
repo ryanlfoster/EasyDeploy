@@ -1,5 +1,21 @@
 {
-	"require": {
+    "name": "jcid/easydeploy",
+    "description": "It's an easy deployment tool for deploying git and svn projects to FTP or SFTP",
+    "authors": [
+        {
+            "name": "Cliff Odijk",
+            "email": "cliff@jcid.nl"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "pear",
+            "url": "http://phpseclib.sourceforge.net"
+        }
+    ],
+    "require": {
+    	"php": ">=5.3.0",
+    	"pear-phpseclib/Net_SFTP" : "*",
 		"justinrainbow/json-schema": ">=1.1.0",
 		"seld/jsonlint": "*",
 		"symfony/class-loader": "2.1.*",

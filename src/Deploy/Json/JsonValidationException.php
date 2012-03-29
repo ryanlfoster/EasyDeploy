@@ -1,10 +1,9 @@
 <?php
 
 /*
- * This file is part of Composer.
+ * This file is part of the Deploy package.
  *
- * (c) Nils Adermann <naderman@naderman.de>
- *     Jordi Boggiano <j.boggiano@seld.be>
+ * (c) Cliff Odijk <cliff@obro.nl>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -15,7 +14,7 @@ namespace Deploy\Json;
 use Exception;
 
 /**
- * @author Jordi Boggiano <j.boggiano@seld.be>
+ * 
  */
 class JsonValidationException extends Exception
 {
