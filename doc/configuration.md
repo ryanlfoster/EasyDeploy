@@ -51,7 +51,6 @@ The servers variable is the section to specify the different available servers t
 
 The events variable is the section where you can specify different event listeners to handle stuff during the process. The build in events are listed on the detail page of the events. 
 
-	``` json
 	{
 		"events" : {
 			"post.upload" : [
@@ -62,7 +61,6 @@ The events variable is the section where you can specify different event listene
 			]
 		}
 	}
-	```
 
 [Event details](events.md)
 
