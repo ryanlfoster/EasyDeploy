@@ -13,7 +13,6 @@ There can be a deploy.json inside of the root of de folder you are running the d
 A deployment is a selection of a branch inside the repository that is being deployed to an external server. The "deploy" variabel is not required and the keys of the object inside it match the branch names inside of the repositorys. The values of the object are strings or an list of strings wraped inside a array like this:
 
 
-	``` json
 	{
 		"deploy" : {
 			"master"		: "server1",
@@ -22,13 +21,11 @@ A deployment is a selection of a branch inside the repository that is being depl
 		}
 		
 	}
-	```
 	
 ## Servers
 
 The servers variable is the section to specify the different available servers to deploy the branch. The "servers" variable is required and a configuration looks something like this.
 
-	``` json
 	{
 		"servers" : {
 			"server1" : {
@@ -47,9 +44,8 @@ The servers variable is the section to specify the different available servers t
 			}
 		}
 	}
-	```
 	
-[Server details](/blob/master/doc/servers.md)
+[Server details](servers.md)
 
 ## Events
 
@@ -68,5 +64,5 @@ The events variable is the section where you can specify different event listene
 	}
 	```
 
-[Event details](/blob/master/doc/events.md)
+[Event details](events.md)
 

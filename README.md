@@ -8,9 +8,16 @@ EasyDeploy is a PHP 5.3 command line tool for automating deployment process to m
 ## How to EasyDeploy
 --------------------
 
-[Installation guide](/blob/master/doc/installation.md)
+[Installation guide](EasyDeploy/blob/master/doc/installation.md)
 
-[Configuration guide](/blob/master/doc/configuration.md)
+[Configuration guide](EasyDeploy/blob/master/doc/configuration.md)
+
+## Command line git ftp
+-----------------------
+
+Not documented yet
+
+	git ftp master version -s server
 
 
 ### NOTE 
