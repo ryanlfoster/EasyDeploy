@@ -29,7 +29,7 @@ Install the bin path to your profile.
 You can use the command 
 
 	Usage:
-	 git git [-s|--server[="..."]] [-a|--all] [branch] [new]
+	 git ftp [-s|--server[="..."]] [-a|--all] [branch] [new]
 	
 	Optional arguments:
 	 branch        The branche name
