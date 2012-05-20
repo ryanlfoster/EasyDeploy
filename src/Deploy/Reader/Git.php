@@ -263,7 +263,7 @@ class Git implements ReaderInterface
 	public function getFileContent($file, $version)
 	{
 		// Get the diff
-		$process = new Process("git show ".$version.":".$file, $this->getPath());
+		$process = new Process("git show '".$version.":".$file."'", $this->getPath());
 		$process->run();
 		if (!$process->isSuccessful()) {
 			throw new \RuntimeException($process->getErrorOutput());
