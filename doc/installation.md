@@ -18,7 +18,7 @@
 
 You can use EasyDeploy by using the git hooks or use the git ftp plugin
 
-### Plugin
+### Plugin )
 
 Install the bin path to your profile.
 
@@ -29,14 +29,14 @@ Install the bin path to your profile.
 You can use the command 
 
 	Usage:
-	 git [-s|--server[="..."]] [-a|--all] [branch] [new]
+	 git git [-s|--server[="..."]] [-a|--all] [branch] [new]
 	
-	Arguments:
+	Optional arguments:
 	 branch        The branche name
 	 new           The new version number
 	
 	Options:
-	 --server (-s) The server name
+	 --server (-s) The server name to deploy to
 	 --all (-a)    Deploy to all servers
 
 
