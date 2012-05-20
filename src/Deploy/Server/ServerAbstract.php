@@ -31,6 +31,10 @@ abstract class ServerAbstract implements ServerInterface
 	 */
 	public function __construct($params)
 	{
+		// Add / to end of path
+		$params['path'] = rtrim($params['path'], '/').'/';
+	
+		// Set params
 		$this->params = $params;
 	}
 	
