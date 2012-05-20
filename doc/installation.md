@@ -14,9 +14,35 @@
 
 [Configuration guide](configuration.md)
 
-## Step 4 ) Install the hook
+## Step 4 ) Install
 
-### git
+You can use EasyDeploy by using the git hooks or use the git ftp plugin
+
+### Plugin
+
+Install the bin path to your profile.
+
+	nano ~/.bash_profile 
+	
+	PATH=#PathToEasyDeploy#/EasyDeploy/bin:$PATH
+
+You can use the command 
+
+	Usage:
+	 git [-s|--server[="..."]] [-a|--all] [branch] [new]
+	
+	Arguments:
+	 branch        The branche name
+	 new           The new version number
+	
+	Options:
+	 --server (-s) The server name
+	 --all (-a)    Deploy to all servers
+
+
+### Hooks )
+
+#### git
 
 Create the following script in the .git/hooks/post-receive file
 
@@ -28,6 +54,6 @@ Create the following script in the .git/hooks/post-receive file
 	done
 	true
 	
-## svn
+#### svn
 
 NOT FINISHED DONT USE!
