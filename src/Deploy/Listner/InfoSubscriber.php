@@ -75,7 +75,7 @@ class InfoSubscriber implements EventSubscriberInterface
 	{
 		$messages = array(
 			"file.upload"	=> "Upload file ".$event->getFile(),
-			"file.delete"	=> "Remove file".$event->getFile(),
+			"file.delete"	=> "Remove file ".$event->getFile(),
 		);
 		
 		if (isset($messages[$event->getName()])){
